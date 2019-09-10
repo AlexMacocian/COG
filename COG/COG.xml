@@ -98,6 +98,12 @@
             </summary>
             <param name="baseEdge">Structure containing the edge details.</param>
         </member>
+        <member name="M:COG.Graphs.UndirectedGraph.RemoveEdge(COG.Representations.BaseEdge)">
+            <summary>
+            Removes an edge from the undirected graph.
+            </summary>
+            <param name="baseEdge"></param>
+        </member>
         <member name="T:COG.MinimumSpanningTree.IMSTSolver">
             <summary>
             Interface for Minimum Spanning Tree solver.

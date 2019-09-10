@@ -37,5 +37,17 @@ namespace COG.Graphs
             baseEdge.From = to;
             base.AddEdge(baseEdge);
         }
+        /// <summary>
+        /// Removes an edge from the undirected graph.
+        /// </summary>
+        /// <param name="baseEdge"></param>
+        public override void RemoveEdge(BaseEdge baseEdge)
+        {
+            base.RemoveEdge(baseEdge);
+            int to = baseEdge.To;
+            baseEdge.To = baseEdge.From;
+            baseEdge.From = to;
+            base.RemoveEdge(baseEdge);
+        }
     }
 }

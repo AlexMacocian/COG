@@ -6,16 +6,16 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace COG.Tests
+namespace COG.Tests.Graphs
 {
     [TestClass]
-    public class UndirectedGraphTests
+    public class DirectedGraphTests
     {
         [TestMethod]
         public void ConstructorTest()
         {
-            UndirectedGraph undirectedGraph = new UndirectedGraph(new MatrixRepresentation(3));
-            if (undirectedGraph.Nodes != 3)
+            DirectedGraph directedGraph = new DirectedGraph(new MatrixRepresentation(3));
+            if(directedGraph.Nodes != 3)
             {
                 Assert.Fail();
             }
@@ -26,16 +26,16 @@ namespace COG.Tests
             string[] lines = File.ReadAllLines("TestGraph.txt");
             int n = int.Parse(lines[0].Split(' ')[0]);
             int m = int.Parse(lines[1].Split(' ')[1]);
-            UndirectedGraph undirectedGraph = new UndirectedGraph(new MatrixRepresentation(n));
-            for (int i = 0; i < m; i++)
+            DirectedGraph directedGraph = new DirectedGraph(new MatrixRepresentation(n));
+            for(int i = 0; i < m; i++)
             {
                 string[] tokens = lines[i + 1].Split(' ');
                 int from = int.Parse(tokens[0]);
                 int to = int.Parse(tokens[1]);
                 double cost = double.Parse(tokens[2]);
-                undirectedGraph.AddEdge(new BaseEdge(from, to, cost));
+                directedGraph.AddEdge(new BaseEdge(from, to, cost));
             }
-            if (undirectedGraph.Edges != m)
+            if(directedGraph.Edges != m)
             {
                 Assert.Fail();
             }
@@ -43,14 +43,14 @@ namespace COG.Tests
         [TestMethod]
         public void RemoveEdgeTest()
         {
-            UndirectedGraph undirectedGraph = new UndirectedGraph(new MatrixRepresentation(2));
-            undirectedGraph.AddEdge(new BaseEdge(0, 1, 1));
-            if (undirectedGraph.Edges != 1)
+            DirectedGraph directedGraph = new DirectedGraph(new MatrixRepresentation(2));
+            directedGraph.AddEdge(new BaseEdge(0, 1, 1));
+            if(directedGraph.Edges != 1)
             {
                 Assert.Fail();
             }
-            undirectedGraph.RemoveEdge(new BaseEdge(0, 1, 1));
-            if (undirectedGraph.Edges > 0)
+            directedGraph.RemoveEdge(new BaseEdge(0, 1, 1));
+            if(directedGraph.Edges > 0)
             {
                 Assert.Fail();
             }
@@ -58,12 +58,12 @@ namespace COG.Tests
         [TestMethod]
         public void GetEdgesTest()
         {
-            UndirectedGraph undirectedGraph = new UndirectedGraph(new MatrixRepresentation(5));
+            DirectedGraph directedGraph = new DirectedGraph(new MatrixRepresentation(5));
             for (int i = 0; i < 5; i++)
             {
-                undirectedGraph.AddEdge(new BaseEdge(0, i, i));
+                directedGraph.AddEdge(new BaseEdge(0, i, i));
             }
-            if (undirectedGraph.GetEdges(new BaseNode(0)).Count != 5)
+            if (directedGraph.GetEdges(new BaseNode(0)).Count != 5)
             {
                 Assert.Fail();
             }
