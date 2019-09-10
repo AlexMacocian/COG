@@ -81,6 +81,11 @@
             Class for undirected graphs.
             </summary>
         </member>
+        <member name="P:COG.Graphs.UndirectedGraph.Edges">
+            <summary>
+            Number of edges in the graph.
+            </summary>
+        </member>
         <member name="M:COG.Graphs.UndirectedGraph.#ctor(COG.Representations.BaseRepresentation)">
             <summary>
             Creates a new instance of undirected graph.
@@ -142,46 +147,87 @@
             <param name="representation">Graph representation.</param>
             <returns>List of edges defining the MST.</returns>
         </member>
-        <member name="T:COG.Program">
-            <summary>
-            Defines the <see cref="T:COG.Program" />
-            </summary>
-        </member>
-        <member name="M:COG.Program.Main(System.String[])">
-            <summary>
-            The Main
-            </summary>
-            <param name="args">The args<see cref="!:string[]"/></param>
-        </member>
         <member name="T:COG.Representations.BaseEdge">
             <summary>
             Bas edge structure holding edge values.
             </summary>
         </member>
-        <member name="F:COG.Representations.BaseEdge.From">
+        <member name="P:COG.Representations.BaseEdge.From">
             <summary>
             Id of source node.
             </summary>
         </member>
-        <member name="F:COG.Representations.BaseEdge.To">
+        <member name="P:COG.Representations.BaseEdge.To">
             <summary>
             Id of destination node.
             </summary>
         </member>
-        <member name="F:COG.Representations.BaseEdge.Cost">
+        <member name="P:COG.Representations.BaseEdge.Cost">
             <summary>
             Cost of the edge.
             </summary>
+        </member>
+        <member name="M:COG.Representations.BaseEdge.#ctor(System.Int32,System.Int32,System.Double)">
+            <summary>
+            Creates a new instance of BaseEdge.
+            </summary>
+            <param name="from">ID of source node.</param>
+            <param name="to">ID of destination node.</param>
+            <param name="cost">Cost of edge.</param>
+        </member>
+        <member name="M:COG.Representations.BaseEdge.#ctor(COG.Representations.BaseNode,COG.Representations.BaseNode,System.Double)">
+            <summary>
+            Creates a new instance of BaseEdge.
+            </summary>
+            <param name="from">Source node.</param>
+            <param name="to">Destination node.</param>
+            <param name="cost">Cost of edge.</param>
         </member>
         <member name="T:COG.Representations.BaseNode">
             <summary>
             Base structure for a node.
             </summary>
         </member>
-        <member name="F:COG.Representations.BaseNode.Id">
+        <member name="P:COG.Representations.BaseNode.Id">
             <summary>
             Id of node.
             </summary>
+        </member>
+        <member name="M:COG.Representations.BaseNode.#ctor(System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="!:"/> class.
+            </summary>
+            <param name="id">Id of node.</param>
+        </member>
+        <member name="M:COG.Representations.BaseNode.op_Equality(COG.Representations.BaseNode,COG.Representations.BaseNode)">
+            <summary>
+            
+            </summary>
+            <param name="node1"></param>
+            <param name="node2"></param>
+            <returns>True if nodes have the same id.</returns>
+        </member>
+        <member name="M:COG.Representations.BaseNode.op_Inequality(COG.Representations.BaseNode,COG.Representations.BaseNode)">
+            <summary>
+            
+            </summary>
+            <param name="node1"></param>
+            <param name="node2"></param>
+            <returns>True if nodes have different id.</returns>
+        </member>
+        <member name="M:COG.Representations.BaseNode.Equals(System.Object)">
+            <summary>
+            Returns true if the provided object has the same reference
+            as this.
+            </summary>
+            <param name="obj">Object to compare.</param>
+            <returns>True if reference is equal.</returns>
+        </member>
+        <member name="M:COG.Representations.BaseNode.GetHashCode">
+            <summary>
+            The GetHashCode
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:COG.Representations.BaseRepresentation">
             <summary>

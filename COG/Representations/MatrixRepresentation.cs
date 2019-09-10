@@ -12,15 +12,16 @@ namespace COG.Representations
         #region Fields
         private double[,] adjMatrix;
         private int edges;
+        private int nodes;
         #endregion
         #region Properties
         /// <summary>
         /// Number of nodes in the graph.
         /// </summary>
-        public override int Nodes { get => (int)Math.Sqrt(adjMatrix.Length);
+        public override int Nodes { get => nodes;
             set
             {
-                if(adjMatrix.Length < value)
+                if(adjMatrix.GetLength(0) < value)
                 {
                     
                     double[,] newMatrix = new double[value, value];
@@ -72,6 +73,7 @@ namespace COG.Representations
         public MatrixRepresentation(int N) : base(N)
         {
             adjMatrix = new double[N, N];
+            this.nodes = N;
         }
         #endregion
         #region Public Methods

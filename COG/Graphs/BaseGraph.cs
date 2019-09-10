@@ -29,7 +29,7 @@ namespace COG.Graphs
         /// <summary>
         /// Number of edges in the graph.
         /// </summary>
-        public int Edges { get => representation.Edges; }
+        public virtual int Edges { get => representation.Edges; }
         /// <summary>
         /// Solver for minimum spanning tree.
         /// </summary>

@@ -12,6 +12,7 @@ namespace COG.Representations
         #region Fields
         private int edges;
         private double[,] adjMatrix;
+        private int nodes;
         #endregion
         #region Properties
         /// <summary>
@@ -19,10 +20,10 @@ namespace COG.Representations
         /// </summary>
         public override int Nodes
         {
-            get => (int)Math.Sqrt(adjMatrix.Length);
+            get => nodes;
             set
             {
-                if (adjMatrix.Length < value)
+                if (adjMatrix.GetLength(0) < value)
                 {
                     double[,] newMatrix = new double[value, value];
                     Array.Copy(adjMatrix, newMatrix, adjMatrix.Length);
@@ -69,6 +70,7 @@ namespace COG.Representations
         public WeightedMatrixRepresentation(int N) : base(N)
         {
             adjMatrix = new double[N, N];
+            this.nodes = N;
         }
         #endregion
         #region Public Methods

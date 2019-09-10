@@ -96,7 +96,7 @@ namespace COG.Representations
         /// </remarks>
         public override void RemoveEdge(BaseEdge edge)
         {
-            SetEdgeCost(edge.From, edge.To, 0);
+            this[edge.From, edge.To] = 0;
         }
         /// <summary>
         /// Get all the edges from specified node.

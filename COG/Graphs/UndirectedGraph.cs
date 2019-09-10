@@ -11,6 +11,10 @@ namespace COG.Graphs
     public sealed class UndirectedGraph : BaseGraph
     {
         /// <summary>
+        /// Number of edges in the graph.
+        /// </summary>
+        public override int Edges { get => base.Edges / 2; }
+        /// <summary>
         /// Creates a new instance of undirected graph.
         /// </summary>
         /// <param name="representation">Representation of the graph nodes.</param>

@@ -16,4 +16,10 @@
     <ProjectReference Include="..\COG\COG.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="TestGraph.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
