@@ -1,0 +1,478 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>COG</name>
+    </assembly>
+    <members>
+        <member name="T:COG.Graphs.BaseGraph">
+            <summary>
+            Base graph class.
+            </summary>
+        </member>
+        <member name="F:COG.Graphs.BaseGraph.representation">
+            <summary>
+            Graph representation.
+            </summary>
+        </member>
+        <member name="F:COG.Graphs.BaseGraph.mstSolver">
+            <summary>
+            Solver for MST.
+            </summary>
+        </member>
+        <member name="P:COG.Graphs.BaseGraph.Nodes">
+            <summary>
+            Number of nodes in the graph.
+            </summary>
+        </member>
+        <member name="P:COG.Graphs.BaseGraph.Edges">
+            <summary>
+            Number of edges in the graph.
+            </summary>
+        </member>
+        <member name="P:COG.Graphs.BaseGraph.MSTSolver">
+            <summary>
+            Solver for minimum spanning tree.
+            </summary>
+        </member>
+        <member name="M:COG.Graphs.BaseGraph.#ctor(COG.Representations.BaseRepresentation)">
+            <summary>
+            Creates a new instance of BaseGraph.
+            </summary>
+            <param name="representation">Graph representation.</param>
+        </member>
+        <member name="M:COG.Graphs.BaseGraph.GetMinimumSpanningTree">
+            <summary>
+            Return the minimum spanning tree.
+            </summary>
+            <returns>List of edges defining the MST.</returns>
+        </member>
+        <member name="M:COG.Graphs.BaseGraph.AddEdge(COG.Representations.BaseEdge)">
+            <summary>
+            Add an edge to the graph.
+            </summary>
+            <param name="baseEdge">Structure containing the edge details.</param>
+        </member>
+        <member name="M:COG.Graphs.BaseGraph.RemoveEdge(COG.Representations.BaseEdge)">
+            <summary>
+            Remove edge from the graph.
+            </summary>
+            <param name="baseEdge">Structure containing the edge details.</param>
+        </member>
+        <member name="M:COG.Graphs.BaseGraph.GetEdges(COG.Representations.BaseNode)">
+            <summary>
+            Get a list of edges from given node.
+            </summary>
+            <param name="node">Node containing the edges.</param>
+            <returns>List of edges from given node.</returns>
+        </member>
+        <member name="T:COG.Graphs.DirectedGraph">
+            <summary>
+            Class for directed graphs.
+            </summary>
+        </member>
+        <member name="M:COG.Graphs.DirectedGraph.#ctor(COG.Representations.BaseRepresentation)">
+            <summary>
+            Creates a new instance of directed graph.
+            </summary>
+            <param name="representation"></param>
+        </member>
+        <member name="T:COG.Graphs.UndirectedGraph">
+            <summary>
+            Class for undirected graphs.
+            </summary>
+        </member>
+        <member name="M:COG.Graphs.UndirectedGraph.#ctor(COG.Representations.BaseRepresentation)">
+            <summary>
+            Creates a new instance of undirected graph.
+            </summary>
+            <param name="representation">Representation of the graph nodes.</param>
+        </member>
+        <member name="M:COG.Graphs.UndirectedGraph.AddEdge(COG.Representations.BaseEdge)">
+            <summary>
+            Add an edge to the undirected graph.
+            </summary>
+            <param name="baseEdge">Structure containing the edge details.</param>
+        </member>
+        <member name="T:COG.MinimumSpanningTree.IMSTSolver">
+            <summary>
+            Interface for Minimum Spanning Tree solver.
+            </summary>
+        </member>
+        <member name="M:COG.MinimumSpanningTree.IMSTSolver.Solve(COG.Representations.BaseRepresentation)">
+            <summary>
+            Obtain the minimum spanning tree.
+            </summary>
+            <param name="representation">Representation of the graph.</param>
+            <returns>List of edges defining the minimum spanning tree.</returns>
+        </member>
+        <member name="T:COG.MinimumSpanningTree.MSTSolverMissingException">
+            <summary>
+            Exception for missing solver for MST.
+            </summary>
+        </member>
+        <member name="M:COG.MinimumSpanningTree.MSTSolverMissingException.#ctor">
+            <summary>
+            Creates a new instance of MSTSolverMissingException
+            </summary>
+        </member>
+        <member name="M:COG.MinimumSpanningTree.MSTSolverMissingException.#ctor(System.String)">
+            <summary>
+            Creates a new instance of MSTSolverMissingException
+            </summary>
+        </member>
+        <member name="M:COG.MinimumSpanningTree.MSTSolverMissingException.#ctor(System.String,System.Exception)">
+            <summary>
+            Creates a new instance of MSTSolverMissingException
+            </summary>
+        </member>
+        <member name="M:COG.MinimumSpanningTree.MSTSolverMissingException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Creates a new instance of MSTSolverMissingException
+            </summary>
+        </member>
+        <member name="T:COG.MinimumSpanningTree.PrimMST">
+            <summary>
+            MST solver using Prim's algorithm.
+            </summary>
+        </member>
+        <member name="M:COG.MinimumSpanningTree.PrimMST.Solve(COG.Representations.BaseRepresentation)">
+            <summary>
+            Obtain the minimum spanning tree.
+            </summary>
+            <param name="representation">Graph representation.</param>
+            <returns>List of edges defining the MST.</returns>
+        </member>
+        <member name="T:COG.Program">
+            <summary>
+            Defines the <see cref="T:COG.Program" />
+            </summary>
+        </member>
+        <member name="M:COG.Program.Main(System.String[])">
+            <summary>
+            The Main
+            </summary>
+            <param name="args">The args<see cref="!:string[]"/></param>
+        </member>
+        <member name="T:COG.Representations.BaseEdge">
+            <summary>
+            Bas edge structure holding edge values.
+            </summary>
+        </member>
+        <member name="F:COG.Representations.BaseEdge.From">
+            <summary>
+            Id of source node.
+            </summary>
+        </member>
+        <member name="F:COG.Representations.BaseEdge.To">
+            <summary>
+            Id of destination node.
+            </summary>
+        </member>
+        <member name="F:COG.Representations.BaseEdge.Cost">
+            <summary>
+            Cost of the edge.
+            </summary>
+        </member>
+        <member name="T:COG.Representations.BaseNode">
+            <summary>
+            Base structure for a node.
+            </summary>
+        </member>
+        <member name="F:COG.Representations.BaseNode.Id">
+            <summary>
+            Id of node.
+            </summary>
+        </member>
+        <member name="T:COG.Representations.BaseRepresentation">
+            <summary>
+            Base class for representations of graphs.
+            To be used for inheritance.
+            </summary>
+        </member>
+        <member name="P:COG.Representations.BaseRepresentation.Nodes">
+            <summary>
+            Number of nodes in the graph.
+            </summary>
+        </member>
+        <member name="P:COG.Representations.BaseRepresentation.Edges">
+            <summary>
+            Number of vertices in the graph.
+            </summary>
+        </member>
+        <member name="P:COG.Representations.BaseRepresentation.Item(System.Int32,System.Int32)">
+            <summary>
+            Returns cost of edge between the provided nodes.
+            </summary>
+            <param name="index1">Source node.</param>
+            <param name="index2">Destination node.</param>
+            <returns>Cost of the edge.</returns>
+        </member>
+        <member name="M:COG.Representations.BaseRepresentation.#ctor(System.Int32)">
+            <summary>
+            Constructor for base representation of a graph.
+            </summary>
+            <param name="N">Forecast number of nodes in the graph.</param>
+        </member>
+        <member name="M:COG.Representations.BaseRepresentation.AddEdge(COG.Representations.BaseEdge)">
+            <summary>
+            Add an edge to the representation.
+            </summary>
+            <param name="edge">Structure containing the edge data.</param>
+        </member>
+        <member name="M:COG.Representations.BaseRepresentation.RemoveEdge(COG.Representations.BaseEdge)">
+            <summary>
+            Remove an edge from the representation.
+            </summary>
+            <param name="edge">Structure containing the edge data.</param>
+        </member>
+        <member name="M:COG.Representations.BaseRepresentation.GetEdges(COG.Representations.BaseNode)">
+            <summary>
+            Get list of edges from provided node.
+            </summary>
+            <param name="node">Source node of the returned edges.</param>
+        </member>
+        <member name="T:COG.Representations.ListRepresentation">
+            <summary>
+            List representation of a graph.
+            </summary>
+        </member>
+        <member name="P:COG.Representations.ListRepresentation.Nodes">
+            <summary>
+            Number of nodes in the graph.
+            </summary>
+        </member>
+        <member name="P:COG.Representations.ListRepresentation.Edges">
+            <summary>
+            Number of edges in the graph.
+            </summary>
+        </member>
+        <member name="P:COG.Representations.ListRepresentation.Item(System.Int32,System.Int32)">
+            <summary>
+            Access edges using indexes.
+            </summary>
+            <param name="index1">Starting node id.</param>
+            <param name="index2">Ending node id.</param>
+            <returns>1 is an edge exists and 0 if no edge exists.</returns>
+            <remarks>
+            When setting an edge value, this representation is unweighted, thus, if the value is equal and over 1, it will be set to 1, 
+            otherwise it will be set to 0. If you want specific costs, use a weighted representation.
+            </remarks>
+        </member>
+        <member name="M:COG.Representations.ListRepresentation.#ctor(System.Int32)">
+            <summary>
+            Creates an instance of a matrix representation for a graph.
+            </summary>
+            <param name="N">Forecasted number of nodes.</param>
+            <remarks>
+            The number of nodes doesn't have to be exact, but exceeding the provided size might cause the array behind the list to resize
+            causing a costly operation.
+            </remarks>
+        </member>
+        <member name="M:COG.Representations.ListRepresentation.AddEdge(COG.Representations.BaseEdge)">
+            <summary>
+            Adds edge to the graph.
+            </summary>
+            <param name="edge">Edge to be added.</param>
+            <remarks>
+            Edge costs are ignored. If you want specific costs, use a weighted representation instead.
+            </remarks>
+        </member>
+        <member name="M:COG.Representations.ListRepresentation.RemoveEdge(COG.Representations.BaseEdge)">
+            <summary>
+            Removes the specified edge from the graph.
+            </summary>
+            <param name="edge">Edge structure containing the edge informations.</param>
+            <remarks>
+            You don't need to provide an exact reference. The structure edge is used only to provide the 
+            fromId and toId in order to identify the edge to be removed.
+            </remarks>
+        </member>
+        <member name="M:COG.Representations.ListRepresentation.GetEdges(COG.Representations.BaseNode)">
+            <summary>
+            Get all the edges from specified node.
+            </summary>
+            <param name="node"></param>
+            <returns>List of all edges from provided node.</returns>
+        </member>
+        <member name="T:COG.Representations.MatrixRepresentation">
+            <summary>
+            Matrix representation of a graph.
+            </summary>
+        </member>
+        <member name="P:COG.Representations.MatrixRepresentation.Nodes">
+            <summary>
+            Number of nodes in the graph.
+            </summary>
+        </member>
+        <member name="P:COG.Representations.MatrixRepresentation.Edges">
+            <summary>
+            Number of edges in the graph.
+            </summary>
+        </member>
+        <member name="P:COG.Representations.MatrixRepresentation.Item(System.Int32,System.Int32)">
+            <summary>
+            Access edges using indexes.
+            </summary>
+            <param name="index1">Starting node id.</param>
+            <param name="index2">Ending node id.</param>
+            <returns>1 is an edge exists and 0 if no edge exists.</returns>
+            <remarks>
+            When setting an edge value, this representation is unweighted, thus, if the value is equal and over 1, it will be set to 1, 
+            otherwise it will be set to 0. If you want specific costs, use a weighted representation.
+            </remarks>
+        </member>
+        <member name="M:COG.Representations.MatrixRepresentation.#ctor(System.Int32)">
+            <summary>
+            Creates an instance of a matrix representation for a graph.
+            </summary>
+            <param name="N">Forecasted number of nodes.</param>
+            <remarks>
+            The number of nodes doesn't have to be exact, but exceeding the matrix size will cause the matrix to resize
+            causing a costly operation.
+            The instance holds N*N double values in a 2D array.
+            </remarks>
+        </member>
+        <member name="M:COG.Representations.MatrixRepresentation.AddEdge(COG.Representations.BaseEdge)">
+            <summary>
+            Adds edge to the graph.
+            </summary>
+            <param name="edge">Edge to be added.</param>
+            <remarks>
+            Edge costs are ignored. If you want specific costs, use a weighted representation instead.
+            </remarks>
+        </member>
+        <member name="M:COG.Representations.MatrixRepresentation.RemoveEdge(COG.Representations.BaseEdge)">
+            <summary>
+            Removes the specified edge from the graph.
+            </summary>
+            <param name="edge">Edge structure containing the edge informations.</param>
+            <remarks>
+            You don't need to provide an exact reference. The structure edge is used only to provide the 
+            fromId and toId in order to identify the edge to be removed.
+            </remarks>
+        </member>
+        <member name="M:COG.Representations.MatrixRepresentation.GetEdges(COG.Representations.BaseNode)">
+            <summary>
+            Gets a list of all edges from specified node.
+            </summary>
+            <param name="node"></param>
+            <returns>All edges from specified node.</returns>
+        </member>
+        <member name="T:COG.Representations.WeightedListRepresentation">
+            <summary>
+            Weighted list representation for a graph.
+            </summary>
+        </member>
+        <member name="P:COG.Representations.WeightedListRepresentation.Nodes">
+            <summary>
+            Number of nodes in the graph.
+            </summary>
+        </member>
+        <member name="P:COG.Representations.WeightedListRepresentation.Edges">
+            <summary>
+            Number of edges in the graph.
+            </summary>
+        </member>
+        <member name="P:COG.Representations.WeightedListRepresentation.Item(System.Int32,System.Int32)">
+            <summary>
+            Access edges using indexes.
+            </summary>
+            <param name="index1">Starting node id.</param>
+            <param name="index2">Ending node id.</param>
+            <returns>Edge weight if an edge exists and 0 if no edge exists.</returns>
+        </member>
+        <member name="M:COG.Representations.WeightedListRepresentation.#ctor(System.Int32)">
+            <summary>
+            Creates an instance of a matrix representation for a graph.
+            </summary>
+            <param name="N">Forecasted number of nodes.</param>
+            <remarks>
+            The number of nodes doesn't have to be exact, but exceeding the provided size might cause the array behind the list to resize
+            causing a costly operation.
+            </remarks>
+        </member>
+        <member name="M:COG.Representations.WeightedListRepresentation.AddEdge(COG.Representations.BaseEdge)">
+            <summary>
+            Adds edge to the graph.
+            </summary>
+            <param name="edge">Edge to be added.</param>
+        </member>
+        <member name="M:COG.Representations.WeightedListRepresentation.RemoveEdge(COG.Representations.BaseEdge)">
+            <summary>
+            Removes the specified edge from the graph.
+            </summary>
+            <param name="edge">Edge structure containing the edge informations.</param>
+            <remarks>
+            You don't need to provide an exact reference. The structure edge is used only to provide the 
+            fromId and toId in order to identify the edge to be removed.
+            </remarks>
+        </member>
+        <member name="M:COG.Representations.WeightedListRepresentation.GetEdges(COG.Representations.BaseNode)">
+            <summary>
+            Get all the edges from specified node.
+            </summary>
+            <param name="node"></param>
+            <returns>List of all edges from provided node.</returns>
+        </member>
+        <member name="T:COG.Representations.WeightedMatrixRepresentation">
+            <summary>
+            Weighted matrix representation for a graph.
+            </summary>
+        </member>
+        <member name="P:COG.Representations.WeightedMatrixRepresentation.Nodes">
+            <summary>
+            Number of nodes in the graph.
+            </summary>
+        </member>
+        <member name="P:COG.Representations.WeightedMatrixRepresentation.Edges">
+            <summary>
+            Number of edges in the graph.
+            </summary>
+        </member>
+        <member name="P:COG.Representations.WeightedMatrixRepresentation.Item(System.Int32,System.Int32)">
+            <summary>
+            Access edges using indexes.
+            </summary>
+            <param name="index1">Starting node id.</param>
+            <param name="index2">Ending node id.</param>
+            <returns>Edge weight if an edge exists and 0 if no edge exists.</returns>
+        </member>
+        <member name="M:COG.Representations.WeightedMatrixRepresentation.#ctor(System.Int32)">
+            <summary>
+            Creates an instance of a matrix representation for a graph.
+            </summary>
+            <param name="N">Forecasted number of nodes.</param>
+            <remarks>
+            The number of nodes doesn't have to be exact, but exceeding the matrix size will cause the matrix to resize
+            causing a costly operation.
+            The instance holds N*N double values in a 2D array.
+            </remarks>
+        </member>
+        <member name="M:COG.Representations.WeightedMatrixRepresentation.AddEdge(COG.Representations.BaseEdge)">
+            <summary>
+            Adds edge to the graph.
+            </summary>
+            <param name="edge">Edge to be added.</param>
+            <remarks>
+            If edge cost is 0, the edge will not be added.
+            </remarks>
+        </member>
+        <member name="M:COG.Representations.WeightedMatrixRepresentation.RemoveEdge(COG.Representations.BaseEdge)">
+            <summary>
+            Removes the specified edge from the graph.
+            </summary>
+            <param name="edge">Edge structure containing the edge informations.</param>
+            <remarks>
+            You don't need to provide an exact reference. The structure edge is used only to provide the 
+            fromId and toId in order to identify the edge to be removed.
+            </remarks>
+        </member>
+        <member name="M:COG.Representations.WeightedMatrixRepresentation.GetEdges(COG.Representations.BaseNode)">
+            <summary>
+            Gets a list of all edges from specified node.
+            </summary>
+            <param name="node"></param>
+            <returns>All edges from specified node.</returns>
+        </member>
+    </members>
+</doc>
