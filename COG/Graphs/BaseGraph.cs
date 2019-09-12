@@ -1,6 +1,7 @@
 ﻿using COG.ConectedComponents;
 using COG.MinimumSpanningTree;
 using COG.Representations;
+using COG.ShortestPaths;
 using System.Collections.Generic;
 
 namespace COG.Graphs
@@ -24,6 +25,11 @@ namespace COG.Graphs
         /// Solver for connected components.
         /// </summary>
         protected IConnectedComponentsSolver ccSolver;
+
+        /// <summary>
+        /// Solver for shortest paths.
+        /// </summary>
+        protected IShortestPathSolver spSolver;
 
         /// <summary>
         /// Gets or sets the Nodes.
@@ -60,14 +66,19 @@ namespace COG.Graphs
             }
         }
         /// <summary>
-        /// Gets or sets the MSTSolver
+        /// Gets or sets the MSTSolver.
         /// </summary>
         public IMSTSolver MSTSolver { get => mstSolver; set => mstSolver = value; }
 
         /// <summary>
-        /// Gets or sets the ConnectedComponentsSolver
+        /// Gets or sets the ConnectedComponentsSolver.
         /// </summary>
         public IConnectedComponentsSolver ConnectedComponentsSolver { get => ccSolver; set => ccSolver = value; }
+
+        /// <summary>
+        /// Gets or sets the ShortestPathSolver.
+        /// </summary>
+        public IShortestPathSolver ShortestPathSolver { get => spSolver; set => spSolver = value; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BaseGraph"/> class.
@@ -86,7 +97,7 @@ namespace COG.Graphs
         {
             if (mstSolver == null)
             {
-                throw new MSTSolverMissingException();
+                throw new MSTSolverMissingException("Graph doesn't have a solver for minimum spanning trees.");
             }
             else
             {
@@ -107,6 +118,24 @@ namespace COG.Graphs
             else
             {
                 throw new MissingConnectedComponentsSolverException("Graph doesn't have a solver for connected components.");
+            }
+        }
+
+        /// <summary>
+        /// Return shortest path between provided nodes.
+        /// </summary>
+        /// <param name="startNode">Starting node id.</param>
+        /// <param name="endNode">Destination node id.</param>
+        /// <returns>List sorted in the order from start to end.</returns>
+        public virtual List<int> GetShortestPath(int startNode, int endNode)
+        {
+            if(spSolver != null)
+            {
+                return spSolver.Solve(this, startNode, endNode);
+            }
+            else
+            {
+                throw new MissingShortestPathsSolverException("Graph doesn't have a solver for shortest paths.");
             }
         }
 

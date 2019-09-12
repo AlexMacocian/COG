@@ -9,11 +9,28 @@
             Class to contain the list of nodes belonging to the same component.
             </summary>
         </member>
+        <member name="F:COG.ConectedComponents.Component.nodes">
+            <summary>
+            Defines the nodes
+            </summary>
+        </member>
+        <member name="P:COG.ConectedComponents.Component.Nodes">
+            <summary>
+            Gets or sets the Nodes
+            </summary>
+        </member>
         <member name="T:COG.ConectedComponents.DepthFirstSearchCC">
             <summary>
             Solver for connected components using a simple depth first search. To be used for undirected graphs
             as it is quicker than other specialized algorithms.
             </summary>
+        </member>
+        <member name="M:COG.ConectedComponents.DepthFirstSearchCC.COG#ConectedComponents#IConnectedComponentsSolver#Solve(COG.Graphs.BaseGraph)">
+            <summary>
+            The Solve
+            </summary>
+            <param name="baseGraph">The baseGraph<see cref="T:COG.Graphs.BaseGraph"/></param>
+            <returns>The <see cref="T:System.Collections.Generic.List`1"/></returns>
         </member>
         <member name="T:COG.ConectedComponents.IConnectedComponentsSolver">
             <summary>
@@ -32,10 +49,60 @@
             Strongly-Connected-Components Solver algorithm based on an algorithm proposed by Kosaraju and Sharir.
             </summary>
         </member>
+        <member name="M:COG.ConectedComponents.KosarajuSharirSCC.COG#ConectedComponents#IConnectedComponentsSolver#Solve(COG.Graphs.BaseGraph)">
+            <summary>
+            The Solve
+            </summary>
+            <param name="baseGraph">The baseGraph<see cref="T:COG.Graphs.BaseGraph"/></param>
+            <returns>The <see cref="T:System.Collections.Generic.List`1"/></returns>
+        </member>
+        <member name="M:COG.ConectedComponents.KosarajuSharirSCC.DFS1(System.Boolean[],System.Collections.Generic.Stack{System.Int32},System.Int32,COG.Graphs.BaseGraph)">
+            <summary>
+            The DFS1
+            </summary>
+            <param name="visited">The visited<see cref="!:bool[]"/></param>
+            <param name="orderStack">The orderStack<see cref="!:Stack&lt;int&gt;"/></param>
+            <param name="v">The v<see cref="T:System.Int32"/></param>
+            <param name="baseGraph">The baseGraph<see cref="T:COG.Graphs.BaseGraph"/></param>
+        </member>
+        <member name="M:COG.ConectedComponents.KosarajuSharirSCC.DFS2(System.Boolean[],COG.ConectedComponents.Component,System.Int32,COG.Graphs.BaseGraph)">
+            <summary>
+            The DFS2
+            </summary>
+            <param name="visited">The visited<see cref="!:bool[]"/></param>
+            <param name="component">The component<see cref="T:COG.ConectedComponents.Component"/></param>
+            <param name="v">The v<see cref="T:System.Int32"/></param>
+            <param name="transposeGraph">The transposeGraph<see cref="T:COG.Graphs.BaseGraph"/></param>
+        </member>
         <member name="T:COG.ConectedComponents.MissingConnectedComponentsSolverException">
             <summary>
             Exception to be used when no CC solver is implemented in the graph.
             </summary>
+        </member>
+        <member name="M:COG.ConectedComponents.MissingConnectedComponentsSolverException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:COG.ConectedComponents.MissingConnectedComponentsSolverException"/> class.
+            </summary>
+        </member>
+        <member name="M:COG.ConectedComponents.MissingConnectedComponentsSolverException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:COG.ConectedComponents.MissingConnectedComponentsSolverException"/> class.
+            </summary>
+            <param name="message">The message<see cref="T:System.String"/></param>
+        </member>
+        <member name="M:COG.ConectedComponents.MissingConnectedComponentsSolverException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:COG.ConectedComponents.MissingConnectedComponentsSolverException"/> class.
+            </summary>
+            <param name="message">The message<see cref="T:System.String"/></param>
+            <param name="innerException">The innerException<see cref="T:System.Exception"/></param>
+        </member>
+        <member name="M:COG.ConectedComponents.MissingConnectedComponentsSolverException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:COG.ConectedComponents.MissingConnectedComponentsSolverException"/> class.
+            </summary>
+            <param name="info">The info<see cref="T:System.Runtime.Serialization.SerializationInfo"/></param>
+            <param name="context">The context<see cref="T:System.Runtime.Serialization.StreamingContext"/></param>
         </member>
         <member name="T:COG.Graphs.BaseGraph">
             <summary>
@@ -55,6 +122,11 @@
         <member name="F:COG.Graphs.BaseGraph.ccSolver">
             <summary>
             Solver for connected components.
+            </summary>
+        </member>
+        <member name="F:COG.Graphs.BaseGraph.spSolver">
+            <summary>
+            Solver for shortest paths.
             </summary>
         </member>
         <member name="P:COG.Graphs.BaseGraph.Nodes">
@@ -79,12 +151,17 @@
         </member>
         <member name="P:COG.Graphs.BaseGraph.MSTSolver">
             <summary>
-            Gets or sets the MSTSolver
+            Gets or sets the MSTSolver.
             </summary>
         </member>
         <member name="P:COG.Graphs.BaseGraph.ConnectedComponentsSolver">
             <summary>
             Gets or sets the ConnectedComponentsSolver.
+            </summary>
+        </member>
+        <member name="P:COG.Graphs.BaseGraph.ShortestPathSolver">
+            <summary>
+            Gets or sets the ShortestPathSolver.
             </summary>
         </member>
         <member name="M:COG.Graphs.BaseGraph.#ctor(COG.Representations.BaseRepresentation)">
@@ -104,6 +181,14 @@
             Return the components of the graph.
             </summary>
             <returns>List of all components.</returns>
+        </member>
+        <member name="M:COG.Graphs.BaseGraph.GetShortestPath(System.Int32,System.Int32)">
+            <summary>
+            Return shortest path between provided nodes.
+            </summary>
+            <param name="startNode">Starting node id.</param>
+            <param name="endNode">Destination node id.</param>
+            <returns>List sorted in the order from start to end.</returns>
         </member>
         <member name="M:COG.Graphs.BaseGraph.AddEdge(COG.Representations.Edge)">
             <summary>
@@ -129,7 +214,6 @@
             Populate the provided <see cref="T:COG.Graphs.BaseGraph"/> with the transpose of current graph.
             </summary>
             <param name="transposeGraph">Graph to be populated with the transposed edges.</param>
-            <returns>Transposed graph.</returns>
         </member>
         <member name="T:COG.Graphs.DirectedGraph">
             <summary>
@@ -146,6 +230,31 @@
             <summary>
             Exception used for missing representations in a graph.
             </summary>
+        </member>
+        <member name="M:COG.Graphs.MissingRepresentationException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:COG.Graphs.MissingRepresentationException"/> class.
+            </summary>
+        </member>
+        <member name="M:COG.Graphs.MissingRepresentationException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:COG.Graphs.MissingRepresentationException"/> class.
+            </summary>
+            <param name="message">The message<see cref="T:System.String"/></param>
+        </member>
+        <member name="M:COG.Graphs.MissingRepresentationException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:COG.Graphs.MissingRepresentationException"/> class.
+            </summary>
+            <param name="message">The message<see cref="T:System.String"/></param>
+            <param name="innerException">The innerException<see cref="T:System.Exception"/></param>
+        </member>
+        <member name="M:COG.Graphs.MissingRepresentationException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:COG.Graphs.MissingRepresentationException"/> class.
+            </summary>
+            <param name="info">The info<see cref="T:System.Runtime.Serialization.SerializationInfo"/></param>
+            <param name="context">The context<see cref="T:System.Runtime.Serialization.StreamingContext"/></param>
         </member>
         <member name="T:COG.Graphs.UndirectedGraph">
             <summary>
@@ -188,6 +297,36 @@
             <param name="baseGraph">Graph to perform MST on.</param>
             <returns>List of edges defining the minimum spanning tree.</returns>
         </member>
+        <member name="T:COG.MinimumSpanningTree.MSTException">
+            <summary>
+            Defines the <see cref="T:COG.MinimumSpanningTree.MSTException" />
+            </summary>
+        </member>
+        <member name="M:COG.MinimumSpanningTree.MSTException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:COG.MinimumSpanningTree.MSTException"/> class.
+            </summary>
+        </member>
+        <member name="M:COG.MinimumSpanningTree.MSTException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:COG.MinimumSpanningTree.MSTException"/> class.
+            </summary>
+            <param name="message">The message<see cref="T:System.String"/></param>
+        </member>
+        <member name="M:COG.MinimumSpanningTree.MSTException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:COG.MinimumSpanningTree.MSTException"/> class.
+            </summary>
+            <param name="message">The message<see cref="T:System.String"/></param>
+            <param name="innerException">The innerException<see cref="T:System.Exception"/></param>
+        </member>
+        <member name="M:COG.MinimumSpanningTree.MSTException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:COG.MinimumSpanningTree.MSTException"/> class.
+            </summary>
+            <param name="info">The info<see cref="T:System.Runtime.Serialization.SerializationInfo"/></param>
+            <param name="context">The context<see cref="T:System.Runtime.Serialization.StreamingContext"/></param>
+        </member>
         <member name="T:COG.MinimumSpanningTree.MSTSolverMissingException">
             <summary>
             Exception for missing solver for MST.
@@ -222,6 +361,21 @@
             <summary>
             MST solver using Prim's algorithm.
             </summary>
+        </member>
+        <member name="M:COG.MinimumSpanningTree.PrimMST.COG#MinimumSpanningTree#IMSTSolver#Solve(COG.Graphs.BaseGraph)">
+            <summary>
+            The Solve
+            </summary>
+            <param name="baseGraph">The baseGraph<see cref="T:COG.Graphs.BaseGraph"/></param>
+            <returns>The <see cref="T:System.Collections.Generic.List`1"/></returns>
+        </member>
+        <member name="M:COG.MinimumSpanningTree.PrimMST.MinimumKey(System.Double[],System.Boolean[])">
+            <summary>
+            The MinimumKey
+            </summary>
+            <param name="keys">The keys<see cref="!:double[]"/></param>
+            <param name="mstSet">The mstSet<see cref="!:bool[]"/></param>
+            <returns>The <see cref="T:System.Int32"/></returns>
         </member>
         <member name="T:COG.Representations.BaseRepresentation">
             <summary>
@@ -299,7 +453,7 @@
         </member>
         <member name="M:COG.Representations.Edge.#ctor(System.Int32,System.Int32,System.Double)">
             <summary>
-            Initializes a new instance of the <see cref="T:COG.Representations.Edge"/> class.
+            Initializes a new instance of the <see cref="!:"/> class.
             </summary>
             <param name="from">ID of source node.</param>
             <param name="to">ID of destination node.</param>
@@ -640,6 +794,35 @@
             </summary>
             <param name="nodeId">Id of specified node.</param>
             <returns>All edges from specified node.</returns>
+        </member>
+        <member name="T:COG.ShortestPaths.DijkstraSP">
+            <summary>
+            Class implementing Dijkstra's algorithm for shortest paths in a graph.
+            </summary>
+        </member>
+        <member name="T:COG.ShortestPaths.IShortestPathSolver">
+            <summary>
+            Interface for Shortest Path solver.
+            </summary>
+        </member>
+        <member name="M:COG.ShortestPaths.IShortestPathSolver.Solve(COG.Graphs.BaseGraph,System.Int32,System.Int32)">
+            <summary>
+            Finds the shortest path between the start and end node.
+            </summary>
+            <param name="baseGraph">Graph containing the nodes.</param>
+            <param name="endNode">End node id.</param>
+            <param name="startNode">Start node id.</param>
+            <returns>List of nodes representing the shortest path.</returns>
+        </member>
+        <member name="T:COG.ShortestPaths.MissingShortestPathsSolverException">
+            <summary>
+            Exception used in case when no shortest path solver exists in the current graph.
+            </summary>
+        </member>
+        <member name="T:COG.ShortestPaths.NoPathFoundException">
+            <summary>
+            Exception to be used when shortest path algorithms fail to find a path.
+            </summary>
         </member>
     </members>
 </doc>
