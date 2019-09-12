@@ -7,13 +7,13 @@ using System.Text;
 namespace COG.Tests.Representations
 {
     [TestClass]
-    public class ListRepresentationTests
+    public class WeightedListRepresentationTests
     {
         [TestMethod]
         public void ConstructorTest()
         {
-            ListRepresentation listRepresentation = new ListRepresentation(5);
-            if(listRepresentation.Nodes != 5)
+            WeightedListRepresentation listRepresentation = new WeightedListRepresentation(5);
+            if (listRepresentation.Nodes != 5)
             {
                 Assert.Fail();
             }
@@ -21,10 +21,14 @@ namespace COG.Tests.Representations
         [TestMethod]
         public void AddEdgeTest()
         {
-            ListRepresentation listRepresentation = new ListRepresentation(5);
+            WeightedListRepresentation listRepresentation = new WeightedListRepresentation(5);
             listRepresentation.AddEdge(new Edge(1, 2, 5));
             listRepresentation.AddEdge(new Edge(3, 1, 5));
-            if(listRepresentation.Edges != 2)
+            if (listRepresentation.Edges != 2)
+            {
+                Assert.Fail();
+            }
+            if(listRepresentation.GetEdges(1)[0].Cost != 5)
             {
                 Assert.Fail();
             }
@@ -32,7 +36,7 @@ namespace COG.Tests.Representations
         [TestMethod]
         public void RemoveEdgeTest()
         {
-            ListRepresentation listRepresentation = new ListRepresentation(5);
+            WeightedListRepresentation listRepresentation = new WeightedListRepresentation(5);
             listRepresentation.AddEdge(new Edge(1, 2, 5));
             listRepresentation.AddEdge(new Edge(3, 1, 5));
             if (listRepresentation.Edges != 2)
@@ -41,7 +45,7 @@ namespace COG.Tests.Representations
             }
             listRepresentation.RemoveEdge(new Edge(1, 2, 5));
             listRepresentation.RemoveEdge(new Edge(3, 1, 5));
-            if(listRepresentation.Edges != 0)
+            if (listRepresentation.Edges != 0)
             {
                 Assert.Fail();
             }
@@ -49,14 +53,21 @@ namespace COG.Tests.Representations
         [TestMethod]
         public void GetEdgesTest()
         {
-            ListRepresentation listRepresentation = new ListRepresentation(5);
+            WeightedListRepresentation listRepresentation = new WeightedListRepresentation(5);
             listRepresentation.AddEdge(new Edge(1, 2, 5));
             listRepresentation.AddEdge(new Edge(3, 1, 5));
             listRepresentation.AddEdge(new Edge(1, 3, 5));
             listRepresentation.AddEdge(new Edge(1, 4, 5));
-            if(listRepresentation.GetEdges(1).Count != 3)
+            if (listRepresentation.GetEdges(1).Count != 3)
             {
                 Assert.Fail();
+            }
+            foreach(Edge baseEdge in listRepresentation.GetEdges(1))
+            {
+                if(baseEdge.Cost != 5)
+                {
+                    Assert.Fail();
+                }
             }
         }
     }

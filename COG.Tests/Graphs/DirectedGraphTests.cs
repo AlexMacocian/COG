@@ -23,19 +23,19 @@ namespace COG.Tests.Graphs
         [TestMethod]
         public void AddEdgeTest()
         {
-            string[] lines = File.ReadAllLines("TestGraph.txt");
+            string[] lines = File.ReadAllLines("MSTTestGraph.txt");
             int n = int.Parse(lines[0].Split(' ')[0]);
-            int m = int.Parse(lines[1].Split(' ')[1]);
+            int m = int.Parse(lines[0].Split(' ')[1]);
             DirectedGraph directedGraph = new DirectedGraph(new MatrixRepresentation(n));
-            for(int i = 0; i < m; i++)
+            for (int i = 0; i < m; i++)
             {
                 string[] tokens = lines[i + 1].Split(' ');
                 int from = int.Parse(tokens[0]);
                 int to = int.Parse(tokens[1]);
                 double cost = double.Parse(tokens[2]);
-                directedGraph.AddEdge(new BaseEdge(from, to, cost));
+                directedGraph.AddEdge(new Edge(from, to, cost));
             }
-            if(directedGraph.Edges != m)
+            if (directedGraph.Edges != m)
             {
                 Assert.Fail();
             }
@@ -44,12 +44,12 @@ namespace COG.Tests.Graphs
         public void RemoveEdgeTest()
         {
             DirectedGraph directedGraph = new DirectedGraph(new MatrixRepresentation(2));
-            directedGraph.AddEdge(new BaseEdge(0, 1, 1));
+            directedGraph.AddEdge(new Edge(0, 1, 1));
             if(directedGraph.Edges != 1)
             {
                 Assert.Fail();
             }
-            directedGraph.RemoveEdge(new BaseEdge(0, 1, 1));
+            directedGraph.RemoveEdge(new Edge(0, 1, 1));
             if(directedGraph.Edges > 0)
             {
                 Assert.Fail();
@@ -61,9 +61,9 @@ namespace COG.Tests.Graphs
             DirectedGraph directedGraph = new DirectedGraph(new MatrixRepresentation(5));
             for (int i = 0; i < 5; i++)
             {
-                directedGraph.AddEdge(new BaseEdge(0, i, i));
+                directedGraph.AddEdge(new Edge(0, i, i));
             }
-            if (directedGraph.GetEdges(new BaseNode(0)).Count != 5)
+            if (directedGraph.GetEdges(0).Count != 5)
             {
                 Assert.Fail();
             }

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace COG.Representations
 {
@@ -10,53 +8,51 @@ namespace COG.Representations
     /// </summary>
     public abstract class BaseRepresentation
     {
-        #region Fields
-        #endregion
-        #region Properties
         /// <summary>
+        /// Gets or sets the Nodes.
         /// Number of nodes in the graph.
         /// </summary>
-        public abstract int Nodes { get ; set ; }
+        public abstract int Nodes { get; set; }
+
         /// <summary>
+        /// Gets the Edges.
         /// Number of vertices in the graph.
         /// </summary>
-        public abstract int Edges { get ; }
+        public abstract int Edges { get; }
+
+
         /// <summary>
         /// Returns cost of edge between the provided nodes.
         /// </summary>
         /// <param name="index1">Source node.</param>
         /// <param name="index2">Destination node.</param>
         /// <returns>Cost of the edge.</returns>
-        public abstract double this [int index1, int index2] { get; set; }
-        #endregion
-        #region Constructors
+        public abstract double this[int index1, int index2] { get; set; }
         /// <summary>
-        /// Constructor for base representation of a graph.
+        /// Initializes a new instance of the <see cref="BaseRepresentation"/> class.
         /// </summary>
         /// <param name="N">Forecast number of nodes in the graph.</param>
         public BaseRepresentation(int N = 0)
         {
-            
         }
-        #endregion
-        #region Public Methods
+
         /// <summary>
         /// Add an edge to the representation.
         /// </summary>
         /// <param name="edge">Structure containing the edge data.</param>
-        public abstract void AddEdge(BaseEdge edge);
+        public abstract void AddEdge(Edge edge);
+
         /// <summary>
         /// Remove an edge from the representation.
         /// </summary>
         /// <param name="edge">Structure containing the edge data.</param>
-        public abstract void RemoveEdge(BaseEdge edge);
+        public abstract void RemoveEdge(Edge edge);
+
         /// <summary>
-        /// Get list of edges from provided node.
+        /// Get list of edges from provided node id.
         /// </summary>
-        /// <param name="node">Source node of the returned edges.</param>
-        public abstract List<BaseEdge> GetEdges(BaseNode node);
-        #endregion
-        #region Private Methods
-        #endregion
+        /// <param name="nodeId">Id of node.</param>
+        /// <returns>List of edges from the current node.</returns>
+        public abstract List<Edge> GetEdges(int nodeId);
     }
 }

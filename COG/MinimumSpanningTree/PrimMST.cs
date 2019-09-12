@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using COG.Graphs;
 using COG.Representations;
+using System.Collections.Generic;
 
 namespace COG.MinimumSpanningTree
 {
@@ -11,35 +10,33 @@ namespace COG.MinimumSpanningTree
     public sealed class PrimMST : IMSTSolver
     {
         /// <summary>
-        /// Obtain the minimum spanning tree.
+        /// The Solve
         /// </summary>
-        /// <param name="representation">Graph representation.</param>
-        /// <returns>List of edges defining the MST.</returns>
-        public List<BaseEdge> Solve(BaseRepresentation representation)
+        /// <param name="baseGraph">The baseGraph<see cref="BaseGraph"/></param>
+        /// <returns>The <see cref="List{Edge}"/></returns>
+        List<Edge> IMSTSolver.Solve(BaseGraph baseGraph)
         {
-            List<BaseEdge> edges = new List<BaseEdge>();
-            int[] parent = new int[representation.Nodes];
-            double[] keys = new double[representation.Nodes];
-            bool[] mstSet = new bool[representation.Nodes];
-            for(int i = 0; i < keys.Length; i++)
+            List<Edge> edges = new List<Edge>();
+            int[] parent = new int[baseGraph.Nodes];
+            double[] keys = new double[baseGraph.Nodes];
+            bool[] mstSet = new bool[baseGraph.Nodes];
+            for (int i = 0; i < keys.Length; i++)
             {
                 keys[i] = double.MaxValue;
             }
             keys[0] = 0;
             parent[0] = -1;
-            for(int i = 0; i < representation.Nodes - 1; i++)
+            for (int i = 0; i < baseGraph.Nodes - 1; i++)
             {
                 int index = MinimumKey(keys, mstSet);
-                if(index == -1)
+                if (index == -1)
                 {
-                    continue;
+                    throw new MSTException("Couldn't find a minimum spanning tree for this graph. Most probably the graph is not connected/strongly-connected.");
                 }
                 mstSet[index] = true;
-                BaseNode node = new BaseNode();
-                node.Id = index;
-                foreach(BaseEdge edge in representation.GetEdges(node))
+                foreach (Edge edge in baseGraph.GetEdges(index))
                 {
-                    if(mstSet[edge.To] == false && edge.Cost < keys[edge.To])
+                    if (mstSet[edge.To] == false && edge.Cost < keys[edge.To])
                     {
                         parent[edge.To] = index;
                         keys[edge.To] = edge.Cost;
@@ -47,17 +44,25 @@ namespace COG.MinimumSpanningTree
                 }
             }
 
-            for (int i = 1; i < representation.Nodes; i++)
+            for (int i = 1; i < baseGraph.Nodes; i++)
             {
-                BaseEdge edge = new BaseEdge();
-                edge.From = parent[i];
-                edge.To = i;
-                edge.Cost = representation[edge.From, edge.To];
+                Edge edge = new Edge
+                {
+                    From = parent[i],
+                    To = i
+                };
+                edge.Cost = baseGraph[edge.From, edge.To];
                 edges.Add(edge);
             }
             return edges;
         }
-        
+
+        /// <summary>
+        /// The MinimumKey
+        /// </summary>
+        /// <param name="keys">The keys<see cref="double[]"/></param>
+        /// <param name="mstSet">The mstSet<see cref="bool[]"/></param>
+        /// <returns>The <see cref="int"/></returns>
         private int MinimumKey(double[] keys, bool[] mstSet)
         {
             double min = double.MaxValue;

@@ -1,8 +1,7 @@
-﻿using COG.MinimumSpanningTree;
+﻿using COG.ConectedComponents;
+using COG.MinimumSpanningTree;
 using COG.Representations;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace COG.Graphs
 {
@@ -11,83 +10,148 @@ namespace COG.Graphs
     /// </summary>
     public class BaseGraph
     {
-        #region Fields
         /// <summary>
         /// Graph representation.
         /// </summary>
         protected BaseRepresentation representation;
+
         /// <summary>
         /// Solver for MST.
         /// </summary>
         protected IMSTSolver mstSolver;
-        #endregion
-        #region Properties
+
         /// <summary>
+        /// Solver for connected components.
+        /// </summary>
+        protected IConnectedComponentsSolver ccSolver;
+
+        /// <summary>
+        /// Gets or sets the Nodes.
         /// Number of nodes in the graph.
         /// </summary>
         public int Nodes { get => representation.Nodes; set => representation.Nodes = value; }
+
         /// <summary>
+        /// Gets the Edges.
         /// Number of edges in the graph.
         /// </summary>
         public virtual int Edges { get => representation.Edges; }
+
+
         /// <summary>
-        /// Solver for minimum spanning tree.
+        /// Gets or sets the edges of the graph.
+        /// </summary>
+        /// <param name="node1">Source node.</param>
+        /// <param name="node2">Destination node.</param>
+        /// <returns>Double value representing the cost of the searched edge.</returns>
+        public virtual double this[int node1, int node2]
+        {
+            get => representation != null ? representation[node1, node2] : throw new MissingRepresentationException("Graph has no representation.");
+            set
+            {
+                if (representation != null)
+                {
+                    representation[node1, node2] = value;
+                }
+                else
+                {
+                    throw new MissingRepresentationException("Graph has no representation.");
+                }
+            }
+        }
+        /// <summary>
+        /// Gets or sets the MSTSolver
         /// </summary>
         public IMSTSolver MSTSolver { get => mstSolver; set => mstSolver = value; }
-        #endregion
-        #region Constructors
+
         /// <summary>
-        /// Creates a new instance of BaseGraph.
+        /// Gets or sets the ConnectedComponentsSolver
+        /// </summary>
+        public IConnectedComponentsSolver ConnectedComponentsSolver { get => ccSolver; set => ccSolver = value; }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BaseGraph"/> class.
         /// </summary>
         /// <param name="representation">Graph representation.</param>
         public BaseGraph(BaseRepresentation representation)
         {
             this.representation = representation;
         }
-        #endregion
-        #region Public Methods
+
         /// <summary>
         /// Return the minimum spanning tree.
         /// </summary>
         /// <returns>List of edges defining the MST.</returns>
-        public virtual List<BaseEdge> GetMinimumSpanningTree()
+        public virtual List<Edge> GetMinimumSpanningTree()
         {
-            if(mstSolver == null)
+            if (mstSolver == null)
             {
                 throw new MSTSolverMissingException();
             }
             else
             {
-                return mstSolver.Solve(representation);
+                return mstSolver.Solve(this);
             }
         }
+
+        /// <summary>
+        /// Return the components of the graph.
+        /// </summary>
+        /// <returns>List of all components.</returns>
+        public virtual List<Component> GetConnectedComponents()
+        {
+            if (ccSolver != null)
+            {
+                return ccSolver.Solve(this);
+            }
+            else
+            {
+                throw new MissingConnectedComponentsSolverException("Graph doesn't have a solver for connected components.");
+            }
+        }
+
         /// <summary>
         /// Add an edge to the graph.
         /// </summary>
         /// <param name="baseEdge">Structure containing the edge details.</param>
-        public virtual void AddEdge(BaseEdge baseEdge)
+        public virtual void AddEdge(Edge baseEdge)
         {
             representation.AddEdge(baseEdge);
         }
+
         /// <summary>
         /// Remove edge from the graph.
         /// </summary>
         /// <param name="baseEdge">Structure containing the edge details.</param>
-        public virtual void RemoveEdge(BaseEdge baseEdge)
+        public virtual void RemoveEdge(Edge baseEdge)
         {
             representation.RemoveEdge(baseEdge);
         }
+
         /// <summary>
-        /// Get a list of edges from given node.
+        /// Get a list of all edges from given node id.
         /// </summary>
-        /// <param name="node">Node containing the edges.</param>
-        /// <returns>List of edges from given node.</returns>
-        public virtual List<BaseEdge> GetEdges(BaseNode node)
+        /// <param name="nodeId">Id of given node.</param>
+        /// <returns>List of all edges from given node.</returns>
+        public virtual List<Edge> GetEdges(int nodeId)
         {
-            return representation.GetEdges(node);
+            return representation.GetEdges(nodeId);
         }
-        #endregion
-        #region Private Methods
-        #endregion
+
+        /// <summary>
+        /// Populate the provided <see cref="BaseGraph"/> with the transpose of current graph.
+        /// </summary>
+        /// <param name="transposeGraph">Graph to be populated with the transposed edges.</param>
+        public virtual void GetTranspose(BaseGraph transposeGraph)
+        {
+            for (int i = 0; i < Nodes; i++)
+            {
+                foreach (Edge baseEdge in GetEdges(i))
+                {
+                    Edge baseEdgeT = new Edge(baseEdge.To, baseEdge.From, baseEdge.Cost);
+                    transposeGraph.AddEdge(baseEdgeT);
+                }
+            }
+        }
     }
 }

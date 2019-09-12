@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace COG.Representations
 {
@@ -9,31 +8,47 @@ namespace COG.Representations
     /// </summary>
     public class MatrixRepresentation : BaseRepresentation
     {
-        #region Fields
-        private double[,] adjMatrix;
-        private int edges;
-        private int nodes;
-        #endregion
-        #region Properties
         /// <summary>
+        /// Defines the adjMatrix
+        /// </summary>
+        private double[,] adjMatrix;
+
+        /// <summary>
+        /// Defines the edges
+        /// </summary>
+        private int edges;
+
+        /// <summary>
+        /// Defines the nodes
+        /// </summary>
+        private int nodes;
+
+        /// <summary>
+        /// Gets or sets the Nodes
         /// Number of nodes in the graph.
         /// </summary>
-        public override int Nodes { get => nodes;
+        public override int Nodes
+        {
+            get => nodes;
             set
             {
-                if(adjMatrix.GetLength(0) < value)
+                if (adjMatrix.GetLength(0) < value)
                 {
-                    
+
                     double[,] newMatrix = new double[value, value];
                     Array.Copy(adjMatrix, newMatrix, adjMatrix.Length);
                     adjMatrix = newMatrix;
                 }
             }
         }
+
         /// <summary>
+        /// Gets the Edges
         /// Number of edges in the graph.
         /// </summary>
         public override int Edges { get => edges; }
+
+
         /// <summary>
         /// Access edges using indexes.
         /// </summary>
@@ -44,7 +59,9 @@ namespace COG.Representations
         /// When setting an edge value, this representation is unweighted, thus, if the value is equal and over 1, it will be set to 1, 
         /// otherwise it will be set to 0. If you want specific costs, use a weighted representation.
         /// </remarks>
-        public override double this[int index1, int index2] { get => adjMatrix[index1, index2];
+        public override double this[int index1, int index2]
+        {
+            get => adjMatrix[index1, index2];
             set
             {
                 double prevValue = adjMatrix[index1, index2];
@@ -59,71 +76,56 @@ namespace COG.Representations
                 adjMatrix[index1, index2] = value > 0 ? 1 : 0;
             }
         }
-        #endregion
-        #region Constructors
         /// <summary>
-        /// Creates an instance of a matrix representation for a graph.
+        /// Initializes a new instance of the <see cref="MatrixRepresentation"/> class.
         /// </summary>
         /// <param name="N">Forecasted number of nodes.</param>
-        /// <remarks>
-        /// The number of nodes doesn't have to be exact, but exceeding the matrix size will cause the matrix to resize
-        /// causing a costly operation.
-        /// The instance holds N*N double values in a 2D array.
-        /// </remarks>
         public MatrixRepresentation(int N) : base(N)
         {
             adjMatrix = new double[N, N];
-            this.nodes = N;
+            nodes = N;
         }
-        #endregion
-        #region Public Methods
+
         /// <summary>
         /// Adds edge to the graph.
         /// </summary>
         /// <param name="edge">Edge to be added.</param>
-        /// <remarks>
-        /// Edge costs are ignored. If you want specific costs, use a weighted representation instead.
-        /// </remarks>
-        public override void AddEdge(BaseEdge edge)
+        public override void AddEdge(Edge edge)
         {
             this[edge.From, edge.To] = 1;
         }
+
         /// <summary>
         /// Removes the specified edge from the graph.
         /// </summary>
         /// <param name="edge">Edge structure containing the edge informations.</param>
-        /// <remarks>
-        /// You don't need to provide an exact reference. The structure edge is used only to provide the 
-        /// fromId and toId in order to identify the edge to be removed.
-        /// </remarks>
-        public override void RemoveEdge(BaseEdge edge)
+        public override void RemoveEdge(Edge edge)
         {
             this[edge.From, edge.To] = 0;
         }
+
         /// <summary>
         /// Gets a list of all edges from specified node.
         /// </summary>
-        /// <param name="node"></param>
+        /// <param name="nodeId">Id of specified node.</param>
         /// <returns>All edges from specified node.</returns>
-        public override List<BaseEdge> GetEdges(BaseNode node)
+        public override List<Edge> GetEdges(int nodeId)
         {
-            List<BaseEdge> edges = new List<BaseEdge>();
+            List<Edge> edges = new List<Edge>();
             for (int i = 0; i < Nodes; i++)
             {
-                if (adjMatrix[node.Id, i] > 0)
+                if (adjMatrix[nodeId, i] > 0)
                 {
-                    BaseEdge baseEdge = new BaseEdge();
-                    baseEdge.Cost = adjMatrix[node.Id, i];
-                    baseEdge.From = node.Id;
-                    baseEdge.To = i;
+                    Edge baseEdge = new Edge
+                    {
+                        Cost = adjMatrix[nodeId, i],
+                        From = nodeId,
+                        To = i
+                    };
                     edges.Add(baseEdge);
                 }
             }
             return edges;
         }
-        #endregion
-        #region Private Methods
-
-        #endregion
     }
 }

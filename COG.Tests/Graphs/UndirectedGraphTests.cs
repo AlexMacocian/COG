@@ -23,9 +23,9 @@ namespace COG.Tests.Graphs
         [TestMethod]
         public void AddEdgeTest()
         {
-            string[] lines = File.ReadAllLines("TestGraph.txt");
+            string[] lines = File.ReadAllLines("MSTTestGraph.txt");
             int n = int.Parse(lines[0].Split(' ')[0]);
-            int m = int.Parse(lines[1].Split(' ')[1]);
+            int m = int.Parse(lines[0].Split(' ')[1]);
             UndirectedGraph undirectedGraph = new UndirectedGraph(new MatrixRepresentation(n));
             for (int i = 0; i < m; i++)
             {
@@ -33,7 +33,7 @@ namespace COG.Tests.Graphs
                 int from = int.Parse(tokens[0]);
                 int to = int.Parse(tokens[1]);
                 double cost = double.Parse(tokens[2]);
-                undirectedGraph.AddEdge(new BaseEdge(from, to, cost));
+                undirectedGraph.AddEdge(new Edge(from, to, cost));
             }
             if (undirectedGraph.Edges != m)
             {
@@ -44,12 +44,12 @@ namespace COG.Tests.Graphs
         public void RemoveEdgeTest()
         {
             UndirectedGraph undirectedGraph = new UndirectedGraph(new MatrixRepresentation(2));
-            undirectedGraph.AddEdge(new BaseEdge(0, 1, 1));
+            undirectedGraph.AddEdge(new Edge(0, 1, 1));
             if (undirectedGraph.Edges != 1)
             {
                 Assert.Fail();
             }
-            undirectedGraph.RemoveEdge(new BaseEdge(0, 1, 1));
+            undirectedGraph.RemoveEdge(new Edge(0, 1, 1));
             if (undirectedGraph.Edges > 0)
             {
                 Assert.Fail();
@@ -61,9 +61,9 @@ namespace COG.Tests.Graphs
             UndirectedGraph undirectedGraph = new UndirectedGraph(new MatrixRepresentation(5));
             for (int i = 0; i < 5; i++)
             {
-                undirectedGraph.AddEdge(new BaseEdge(0, i, i));
+                undirectedGraph.AddEdge(new Edge(0, i, i));
             }
-            if (undirectedGraph.GetEdges(new BaseNode(0)).Count != 5)
+            if (undirectedGraph.GetEdges(0).Count != 5)
             {
                 Assert.Fail();
             }

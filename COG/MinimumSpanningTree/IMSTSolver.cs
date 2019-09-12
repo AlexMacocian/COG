@@ -1,7 +1,6 @@
-﻿using COG.Representations;
-using System;
+﻿using COG.Graphs;
+using COG.Representations;
 using System.Collections.Generic;
-using System.Text;
 
 namespace COG.MinimumSpanningTree
 {
@@ -13,8 +12,8 @@ namespace COG.MinimumSpanningTree
         /// <summary>
         /// Obtain the minimum spanning tree.
         /// </summary>
-        /// <param name="representation">Representation of the graph.</param>
+        /// <param name="baseGraph">Graph to perform MST on.</param>
         /// <returns>List of edges defining the minimum spanning tree.</returns>
-        List<BaseEdge> Solve(BaseRepresentation representation);
+        List<Edge> Solve(BaseGraph baseGraph);
     }
 }

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using COG.Representations;
+﻿using COG.Representations;
 
 namespace COG.Graphs
 {
@@ -10,9 +7,8 @@ namespace COG.Graphs
     /// </summary>
     public sealed class DirectedGraph : BaseGraph
     {
-        
         /// <summary>
-        /// Creates a new instance of directed graph.
+        /// Initializes a new instance of the <see cref="DirectedGraph"/> class.
         /// </summary>
         /// <param name="representation"></param>
         public DirectedGraph(BaseRepresentation representation) : base(representation)

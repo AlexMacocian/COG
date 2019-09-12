@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace COG.Representations
 {
@@ -9,17 +7,34 @@ namespace COG.Representations
     /// </summary>
     public class WeightedListRepresentation : BaseRepresentation
     {
-        #region Fields
+        /// <summary>
+        /// Defines the <see cref="AdjEntry" />
+        /// </summary>
         private class AdjEntry
         {
+            /// <summary>
+            /// Defines the ToId
+            /// </summary>
             public int ToId;
+
+            /// <summary>
+            /// Defines the Cost
+            /// </summary>
             public double Cost;
         }
-        private List<List<AdjEntry>> adjList;
-        private int edges;
-        #endregion
-        #region Properties
+
         /// <summary>
+        /// Defines the adjList
+        /// </summary>
+        private List<List<AdjEntry>> adjList;
+
+        /// <summary>
+        /// Defines the edges
+        /// </summary>
+        private int edges;
+
+        /// <summary>
+        /// Gets or sets the Nodes
         /// Number of nodes in the graph.
         /// </summary>
         public override int Nodes
@@ -40,10 +55,14 @@ namespace COG.Representations
                 }
             }
         }
+
         /// <summary>
+        /// Gets the Edges
         /// Number of edges in the graph.
         /// </summary>
         public override int Edges { get => edges; }
+
+
         /// <summary>
         /// Access edges using indexes.
         /// </summary>
@@ -51,16 +70,10 @@ namespace COG.Representations
         /// <param name="index2">Ending node id.</param>
         /// <returns>Edge weight if an edge exists and 0 if no edge exists.</returns>
         public override double this[int index1, int index2] { get => GetEdgeCost(index1, index2); set => SetEdgeCost(index1, index2, value); }
-        #endregion
-        #region Constructors
         /// <summary>
-        /// Creates an instance of a matrix representation for a graph.
+        /// Initializes a new instance of the <see cref="WeightedListRepresentation"/> class.
         /// </summary>
         /// <param name="N">Forecasted number of nodes.</param>
-        /// <remarks>
-        /// The number of nodes doesn't have to be exact, but exceeding the provided size might cause the array behind the list to resize
-        /// causing a costly operation.
-        /// </remarks>
         public WeightedListRepresentation(int N) : base(N)
         {
             adjList = new List<List<AdjEntry>>(N);
@@ -69,48 +82,52 @@ namespace COG.Representations
                 adjList.Add(new List<AdjEntry>());
             }
         }
-        #endregion
-        #region Public Methods
+
         /// <summary>
         /// Adds edge to the graph.
         /// </summary>
         /// <param name="edge">Edge to be added.</param>
-        public override void AddEdge(BaseEdge edge)
+        public override void AddEdge(Edge edge)
         {
             this[edge.From, edge.To] = edge.Cost;
         }
+
         /// <summary>
         /// Removes the specified edge from the graph.
         /// </summary>
         /// <param name="edge">Edge structure containing the edge informations.</param>
-        /// <remarks>
-        /// You don't need to provide an exact reference. The structure edge is used only to provide the 
-        /// fromId and toId in order to identify the edge to be removed.
-        /// </remarks>
-        public override void RemoveEdge(BaseEdge edge)
+        public override void RemoveEdge(Edge edge)
         {
             this[edge.From, edge.To] = 0;
         }
+
         /// <summary>
         /// Get all the edges from specified node.
         /// </summary>
-        /// <param name="node"></param>
+        /// <param name="nodeId">Id of specified node.</param>
         /// <returns>List of all edges from provided node.</returns>
-        public override List<BaseEdge> GetEdges(BaseNode node)
+        public override List<Edge> GetEdges(int nodeId)
         {
-            List<BaseEdge> edges = new List<BaseEdge>(adjList[node.Id].Count);
-            foreach(AdjEntry entry in adjList[node.Id])
+            List<Edge> edges = new List<Edge>(adjList[nodeId].Count);
+            foreach (AdjEntry entry in adjList[nodeId])
             {
-                BaseEdge edge = new BaseEdge();
-                edge.From = node.Id;
-                edge.To = entry.ToId;
-                edge.Cost = entry.Cost;
+                Edge edge = new Edge
+                {
+                    From = nodeId,
+                    To = entry.ToId,
+                    Cost = entry.Cost
+                };
                 edges.Add(edge);
             }
             return edges;
         }
-        #endregion
-        #region Private Methods
+
+        /// <summary>
+        /// The GetEdgeCost
+        /// </summary>
+        /// <param name="fromId">The fromId<see cref="int"/></param>
+        /// <param name="toId">The toId<see cref="int"/></param>
+        /// <returns>The <see cref="double"/></returns>
         private double GetEdgeCost(int fromId, int toId)
         {
             foreach (AdjEntry entry in adjList[fromId])
@@ -122,6 +139,13 @@ namespace COG.Representations
             }
             return 0;
         }
+
+        /// <summary>
+        /// The GetEntry
+        /// </summary>
+        /// <param name="fromId">The fromId<see cref="int"/></param>
+        /// <param name="toId">The toId<see cref="int"/></param>
+        /// <returns>The <see cref="AdjEntry"/></returns>
         private AdjEntry GetEntry(int fromId, int toId)
         {
             foreach (AdjEntry entry in adjList[fromId])
@@ -133,6 +157,13 @@ namespace COG.Representations
             }
             return null;
         }
+
+        /// <summary>
+        /// The SetEdgeCost
+        /// </summary>
+        /// <param name="fromId">The fromId<see cref="int"/></param>
+        /// <param name="toId">The toId<see cref="int"/></param>
+        /// <param name="cost">The cost<see cref="double"/></param>
         private void SetEdgeCost(int fromId, int toId, double cost)
         {
             if (cost > 0)
@@ -144,9 +175,11 @@ namespace COG.Representations
                 }
                 else
                 {
-                    AdjEntry newEntry = new AdjEntry();
-                    newEntry.ToId = toId;
-                    newEntry.Cost = cost;
+                    AdjEntry newEntry = new AdjEntry
+                    {
+                        ToId = toId,
+                        Cost = cost
+                    };
                     adjList[fromId].Add(newEntry);
                     edges++;
                 }
@@ -161,6 +194,5 @@ namespace COG.Representations
                 }
             }
         }
-        #endregion
     }
 }

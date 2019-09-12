@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Runtime.Serialization;
-using System.Text;
 
 namespace COG.MinimumSpanningTree
 {
@@ -11,26 +9,34 @@ namespace COG.MinimumSpanningTree
     public class MSTSolverMissingException : Exception
     {
         /// <summary>
-        /// Creates a new instance of MSTSolverMissingException
+        /// Initializes a new instance of the <see cref="MSTSolverMissingException"/> class.
         /// </summary>
         public MSTSolverMissingException()
         {
         }
+
         /// <summary>
-        /// Creates a new instance of MSTSolverMissingException
+        /// Initializes a new instance of the <see cref="MSTSolverMissingException"/> class.
         /// </summary>
+        /// <param name="message">The message<see cref="string"/></param>
         public MSTSolverMissingException(string message) : base(message)
         {
         }
+
         /// <summary>
-        /// Creates a new instance of MSTSolverMissingException
+        /// Initializes a new instance of the <see cref="MSTSolverMissingException"/> class.
         /// </summary>
+        /// <param name="message">The message<see cref="string"/></param>
+        /// <param name="innerException">The innerException<see cref="Exception"/></param>
         public MSTSolverMissingException(string message, Exception innerException) : base(message, innerException)
         {
         }
+
         /// <summary>
-        /// Creates a new instance of MSTSolverMissingException
+        /// Initializes a new instance of the <see cref="MSTSolverMissingException"/> class.
         /// </summary>
+        /// <param name="info">The info<see cref="SerializationInfo"/></param>
+        /// <param name="context">The context<see cref="StreamingContext"/></param>
         protected MSTSolverMissingException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
         }
