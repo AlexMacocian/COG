@@ -1,5 +1,6 @@
 ﻿using COG.Graphs;
 using COG.Representations;
+using COG.Traversals;
 using System.Collections.Generic;
 
 namespace COG.ConectedComponents
@@ -19,30 +20,23 @@ namespace COG.ConectedComponents
         {
             List<Component> components = new List<Component>();
             Component component = null;
-            Stack<int> dfsStack = new Stack<int>();
+            DepthFirstSearch depthFirstSearch = new DepthFirstSearch();
             int n = baseGraph.Nodes;
+            int curNode = -1;
             bool[] visited = new bool[n];
 
             for (int i = 0; i < n; i++)
             {
                 if (!visited[i])
                 {
-                    dfsStack.Push(i);
+                    depthFirstSearch.Initialize(baseGraph, i);
                     component = new Component();
                     components.Add(component);
                 }
-                while (dfsStack.Count > 0)
+                while (depthFirstSearch.Traverse(out curNode))
                 {
-                    int currNode = dfsStack.Pop();
-                    visited[currNode] = true;
-                    component.Nodes.Add(currNode);
-                    foreach (Edge e in baseGraph.GetEdges(currNode))
-                    {
-                        if (!visited[e.To])
-                        {
-                            dfsStack.Push(e.To);
-                        }
-                    }
+                    visited[curNode] = true;
+                    component.Nodes.Add(curNode);
                 }
             }
             return components;

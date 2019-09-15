@@ -41,7 +41,10 @@ namespace COG.Traversals
                 visited[currentNode] = true;
                 foreach(Edge edge in baseGraph.GetEdges(currentNode))
                 {
-                    nodeQueue.Enqueue(edge.To);
+                    if (!visited[edge.To])
+                    {
+                        nodeQueue.Enqueue(edge.To);
+                    }
                 }
                 return true;
             }

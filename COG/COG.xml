@@ -824,5 +824,62 @@
             Exception to be used when shortest path algorithms fail to find a path.
             </summary>
         </member>
+        <member name="T:COG.Traversals.BreadthFirstSearch">
+            <summary>
+            BFS algorithm for graph traversing.
+            </summary>
+        </member>
+        <member name="M:COG.Traversals.BreadthFirstSearch.Initialize(COG.Graphs.BaseGraph,System.Int32)">
+            <summary>
+            Initialize the BFS algorithm.
+            </summary>
+            <param name="graph">Graph to perform the algorithm on.</param>
+            <param name="startNode">Starting node for the algorithm.</param>
+        </member>
+        <member name="M:COG.Traversals.BreadthFirstSearch.Traverse(System.Int32@)">
+            <summary>
+            Perform one traversing step on the graph.
+            </summary>
+            <param name="currentNode">The id of the node the traversing algorithm is currently at.</param>
+            <returns>True if the traversing is taking place. False if the traversing has ended.</returns>
+        </member>
+        <member name="T:COG.Traversals.DepthFirstSearch">
+            <summary>
+            DFS algorithm for graph traversing.
+            </summary>
+        </member>
+        <member name="M:COG.Traversals.DepthFirstSearch.Initialize(COG.Graphs.BaseGraph,System.Int32)">
+            <summary>
+            Initialize the BFS algorithm.
+            </summary>
+            <param name="graph">Graph to perform the algorithm on.</param>
+            <param name="startNode">Starting node for the algorithm.</param>
+        </member>
+        <member name="M:COG.Traversals.DepthFirstSearch.Traverse(System.Int32@)">
+            <summary>
+            Perform one traversing step on the graph.
+            </summary>
+            <param name="currentNode">The id of the node the traversing algorithm is currently at.</param>
+            <returns>True if the traversing is taking place. False if the traversing has ended.</returns>
+        </member>
+        <member name="T:COG.Traversals.ITraversal">
+            <summary>
+            Interface for graph traversal algorithms
+            </summary>
+        </member>
+        <member name="M:COG.Traversals.ITraversal.Initialize(COG.Graphs.BaseGraph,System.Int32)">
+            <summary>
+            Initialize the graph traversal with the starting node.
+            </summary>
+            <param name="graph">Graph to begin traversing.</param>
+            <param name="startNode">Starting node for the traversal.</param>
+        </member>
+        <member name="M:COG.Traversals.ITraversal.Traverse(System.Int32@)">
+            <summary>
+            Traverses the graph one call at a time, returning false if the traversal has finished.
+            </summary>
+            <param name="currentNode">Returns the current node obtained during traversing.</param>
+            <returns>True if traversing is taking place, false if traversing has ended.</returns>
+        </member>
     </members>
 </doc>
