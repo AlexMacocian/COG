@@ -38,6 +38,17 @@ namespace COG.Traversals
             if (nodeQueue.Count > 0)
             {
                 currentNode = nodeQueue.Pop();
+                while (visited[currentNode] != false)
+                {
+                    if (nodeQueue.Count > 0)
+                    {
+                        currentNode = nodeQueue.Pop();
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
                 visited[currentNode] = true;
                 foreach (Edge edge in baseGraph.GetEdges(currentNode))
                 {
