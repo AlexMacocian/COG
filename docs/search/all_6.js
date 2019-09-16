@@ -1,0 +1,8 @@
+var searchData=
+[
+  ['getconnectedcomponents',['GetConnectedComponents',['../class_c_o_g_1_1_graphs_1_1_base_graph.html#a48fc79c244a6f031093a863bc2076384',1,'COG::Graphs::BaseGraph']]],
+  ['getedges',['GetEdges',['../class_c_o_g_1_1_graphs_1_1_base_graph.html#af1649e3d369e0fe7c7fb876f6a89fe3e',1,'COG.Graphs.BaseGraph.GetEdges()'],['../class_c_o_g_1_1_representations_1_1_base_representation.html#aa0e11ec3bf16e62a21381273792762c4',1,'COG.Representations.BaseRepresentation.GetEdges()'],['../class_c_o_g_1_1_representations_1_1_list_representation.html#ac9960aefe7efae3c0fb0343aa93f096f',1,'COG.Representations.ListRepresentation.GetEdges()'],['../class_c_o_g_1_1_representations_1_1_matrix_representation.html#ac961dbb5992fe44c9fa97a95db430e0c',1,'COG.Representations.MatrixRepresentation.GetEdges()'],['../class_c_o_g_1_1_representations_1_1_weighted_list_representation.html#ab23a22ee1cb8fa4e7605623928e679a7',1,'COG.Representations.WeightedListRepresentation.GetEdges()'],['../class_c_o_g_1_1_representations_1_1_weighted_matrix_representation.html#aab1f76c5c944b6ce1d364e9e1d012b07',1,'COG.Representations.WeightedMatrixRepresentation.GetEdges()']]],
+  ['getminimumspanningtree',['GetMinimumSpanningTree',['../class_c_o_g_1_1_graphs_1_1_base_graph.html#a8b8af4ababd73c669ce4b06f42e9169d',1,'COG::Graphs::BaseGraph']]],
+  ['getshortestpath',['GetShortestPath',['../class_c_o_g_1_1_graphs_1_1_base_graph.html#a72cd158c7cb0f9fbb398a49f47236e2e',1,'COG::Graphs::BaseGraph']]],
+  ['gettranspose',['GetTranspose',['../class_c_o_g_1_1_graphs_1_1_base_graph.html#a8ddf8ccd0bcd9aba5fb3637ab957e1f7',1,'COG::Graphs::BaseGraph']]]
+];
